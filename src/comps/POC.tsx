@@ -35,7 +35,14 @@ export default function POC() {
   }, [store]);
 
   return (
-    <Grid container wrap="nowrap" justifyContent="center" alignItems="center">
+    <Grid
+      container
+      wrap="nowrap"
+      justifyContent="center"
+      alignItems="center"
+      width="60%"
+      marginLeft="10%"
+    >
       <Grid item>
         <ScoreGraph
           score={getAttentionScoreFromObject(currentEEG)}

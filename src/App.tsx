@@ -25,9 +25,13 @@ function App() {
       alignItems="center"
       width="100vw"
       height="100vh"
+      bgcolor="#eae4f5"
     >
       <Grid item>
-        <Button onClick={async () => seteegO(await connectToMuse())}>
+        <Button
+          sx={{ color: "#492e7b", fontSize: "200%" }}
+          onClick={async () => seteegO(await connectToMuse())}
+        >
           {eegO ? "disconnect" : "connect"}
         </Button>{" "}
       </Grid>

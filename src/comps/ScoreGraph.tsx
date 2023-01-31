@@ -11,12 +11,12 @@ export default function ScoreGraph({
     {
       name: "100",
       score: 100,
-      fill: "white",
+      fill: "#eae4f5",
     },
     {
       name,
       score: score,
-      fill: "#83a6ed",
+      fill: "#492e7b",
     },
   ];
 
@@ -33,7 +33,7 @@ export default function ScoreGraph({
       endAngle={0}
     >
       <RadialBar
-        label={{ fill: "white", position: "insideStart" }}
+        label={{ fill: "#eae4f5", position: "insideStart" }}
         background
         dataKey="score"
       />
