@@ -55,7 +55,7 @@ export default function POC() {
 //const ourChannels = ["A1", "A2", "F7", "F8"];
 
 const getAttentionScoreFromObject = (object: any) => {
-  let score = 50;
+  let score = 5;
   try {
     const keys = Object.keys(object);
     const values = Object.keys(object).map(
@@ -72,11 +72,11 @@ const getAttentionScoreFromObject = (object: any) => {
         3 * yoadedObject.BETA_LOW) *
         4;
   } catch (e) {}
-  return score;
+  return score < 5 ? 5 : score > 100 ? 100 : score;
 };
 
 const getCalmnessScoreFromObject = (object: any) => {
-  let score = 50;
+  let score = 5;
   try {
     const keys = Object.keys(object);
     const values = Object.keys(object).map(
@@ -93,5 +93,5 @@ const getCalmnessScoreFromObject = (object: any) => {
         yoadedObject.ALPHA_HIGH) *
         4;
   } catch (e) {}
-  return score;
+  return score < 5 ? 5 : score > 100 ? 100 : score;
 };
