@@ -32,7 +32,7 @@ export default function EEGVisu() {
       .subscribe((eeg: any) => {
         eeg && setcurrentEEG(eeg);
       });
-  }, [store]);
+  }, [frequencyBands]);
 
   return (
     <Typography>
