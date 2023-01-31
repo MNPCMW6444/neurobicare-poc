@@ -1,6 +1,5 @@
 import Grid from "@mui/material/Grid";
 import { epoch, fft, powerByBand } from "@neurosity/pipes";
-import { IFrequencyBands } from "@neurosity/pipes/dist/esm/types/frequencyBands";
 import { useEffect, useState } from "react";
 import { FrequencyBands } from "../constants";
 import storeObservabler from "../muse/storeObservabler";
@@ -28,13 +27,12 @@ export default function POC() {
       .pipe(
         epoch({ duration: 256, interval: 100 }) as any,
         fft({ bins: 256 }) as any,
-        powerByBandWithT(frequencyBands)
+        powerByBand(frequencyBands) as any
       )
       .subscribe((eeg: any) => {
-        debugger;
         eeg && setcurrentEEG(eeg);
       });
-  }, [frequencyBands]);
+  }, [store]);
 
   return (
     <Grid
@@ -103,11 +101,4 @@ const getCalmnessScoreFromObject = (object: any) => {
         4;
   } catch (e) {}
   return score < 5 ? 5 : score > 100 ? 100 : score;
-};
-
-const powerByBandWithT: any = (bands: IFrequencyBands) => {
-  return {
-    ...powerByBand(bands),
-    timestamp: 23423,
-  };
 };
