@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import EEGVisuManager from "./comps/EEGVisuManager";
 import Grid from "@mui/material/Grid";
 import POC from "./comps/POC";
+import Clock from "./comps/Clock";
 
 function App() {
   const [eegO, seteegO] = useState<Observable<EEGReading>>();
@@ -34,6 +35,10 @@ function App() {
         >
           {eegO ? "disconnect" : "connect"}
         </Button>{" "}
+      </Grid>
+
+      <Grid item>
+        <Clock />
       </Grid>
 
       <Grid item>

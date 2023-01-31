@@ -32,7 +32,7 @@ export default function POC() {
       .subscribe((eeg: any) => {
         eeg && setcurrentEEG(eeg);
       });
-  }, [store]);
+  }, [frequencyBands]);
 
   return (
     <Grid
