@@ -70,10 +70,14 @@ export const museSlice = createSlice({
         state.museReadings.push(pipableRes);
       } else state.partialMuseReadings.push(res);
     },
+    clear: (state: MuseState) => {
+      state.partialMuseReadings = [];
+      state.museReadings = [];
+    },
   },
 });
 
-export const { addChannelSample } = museSlice.actions;
+export const { addChannelSample, clear } = museSlice.actions;
 
 export const actions = museSlice.actions;
 

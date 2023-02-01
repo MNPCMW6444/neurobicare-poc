@@ -8,7 +8,7 @@ const connectToMuse = async () => {
     await c.start();
     eeg = c.eegReadings;
   } catch (err) {
-    console.log("Connection error: " + err);
+    // console.log("Connection error: " + err);
   }
   return eeg;
 };

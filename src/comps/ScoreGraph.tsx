@@ -20,8 +20,8 @@ export default function ScoreGraph({
     },
   ];
 
-  console.log(score);
 
+  
   return (
     <RadialBarChart
       width={730}

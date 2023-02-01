@@ -10,17 +10,7 @@ import storeObservabler from "../muse/storeObservabler";
 export default function EEGVisu() {
   const [currentEEG, setcurrentEEG] = useState<any>();
 
-  const freqnames = Object.keys(FrequencyBands);
-  const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
-
-  const frequencyBands = {} as any;
-
-  freqnames.forEach((freqname: string, index: number) => {
-    frequencyBands[freqname] = [
-      freqrange[index].minFrequencyiInHz,
-      freqrange[index].maxFrequencyiInHz,
-    ];
-  });
+  const frequencyBands = fgetter();
 
   useEffect(() => {
     storeObservabler(store)
@@ -40,3 +30,18 @@ export default function EEGVisu() {
     </Typography>
   );
 }
+
+const fgetter = () => {
+  const freqnames = Object.keys(FrequencyBands);
+  const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
+
+  const frequencyBands = {} as any;
+
+  freqnames.forEach((freqname: string, index: number) => {
+    frequencyBands[freqname] = [
+      freqrange[index].minFrequencyiInHz,
+      freqrange[index].maxFrequencyiInHz,
+    ];
+  });
+  return frequencyBands;
+};

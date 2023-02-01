@@ -10,17 +10,7 @@ import ScoreGraph from "./ScoreGraph";
 export default function POC() {
   const [currentEEG, setcurrentEEG] = useState<any>();
 
-  const freqnames = Object.keys(FrequencyBands);
-  const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
-
-  const frequencyBands = {} as any;
-
-  freqnames.forEach((freqname: string, index: number) => {
-    frequencyBands[freqname] = [
-      freqrange[index].minFrequencyiInHz,
-      freqrange[index].maxFrequencyiInHz,
-    ];
-  });
+  const frequencyBands = fgetter();
 
   useEffect(() => {
     storeObservabler(store)
@@ -79,7 +69,7 @@ const getAttentionScoreFromObject = (object: any) => {
         3 * yoadedObject.BETA_LOW) *
         4;
   } catch (e) {}
-  return score < 5 ? 5 : score > 100 ? 100 : score;
+  return Math.floor(score < 5 ? 5 : score > 100 ? 100 : score);
 };
 
 const getCalmnessScoreFromObject = (object: any) => {
@@ -100,5 +90,20 @@ const getCalmnessScoreFromObject = (object: any) => {
         yoadedObject.ALPHA_HIGH) *
         4;
   } catch (e) {}
-  return score < 5 ? 5 : score > 100 ? 100 : score;
+  return Math.floor(score < 5 ? 5 : score > 100 ? 100 : score);
+};
+
+const fgetter = () => {
+  const freqnames = Object.keys(FrequencyBands);
+  const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
+
+  const frequencyBands = {} as any;
+
+  freqnames.forEach((freqname: string, index: number) => {
+    frequencyBands[freqname] = [
+      freqrange[index].minFrequencyiInHz,
+      freqrange[index].maxFrequencyiInHz,
+    ];
+  });
+  return frequencyBands;
 };

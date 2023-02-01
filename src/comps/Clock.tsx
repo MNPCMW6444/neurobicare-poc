@@ -1,13 +1,14 @@
 import { Typography } from "@mui/material";
-import { epoch, fft, powerByBand } from "@neurosity/pipes";
 import { useEffect, useState } from "react";
 import { FrequencyBands } from "../constants";
+import useClear from "../hooks/clear";
 import storeObservabler from "../muse/storeObservabler";
 import { store } from "../store/store";
 import { FrequencyRangeInHz } from "../types";
 
 export default function Clock() {
   const [timestamp, settimestamp] = useState<number>(0);
+  const clear = useClear();
 
   const freqnames = Object.keys(FrequencyBands);
   const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
@@ -25,8 +26,9 @@ export default function Clock() {
     storeObservabler(store).subscribe((eeg: any) => {
       eeg && settimestamp(eeg.timestamp);
     });
-  }, [frequencyBands]);
+  }, []);
 
+  if (new Date().getSeconds() - new Date(timestamp).getSeconds() > 1) clear();
   return (
     <>
       <Typography variant="h4" color="#492e7b">
