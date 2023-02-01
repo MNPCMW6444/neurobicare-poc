@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 const ourChannels = ["A1", "A2", "F7", "F8"];
@@ -35,25 +36,25 @@ export default function EEGGraph({ data }: any) {
   });
 
   return (
-    <BarChart
-      width={1000}
-      height={400}
-      data={dataE}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      {ourChannels.map((channelName, i: number) => {
-        return <Bar dataKey={channelName} fill={yoadColors[i]} />;
-      })}
-    </BarChart>
+    <ResponsiveContainer width={1000} height={250}>
+      <BarChart
+        data={dataE}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        {ourChannels.map((channelName, i: number) => {
+          return <Bar dataKey={channelName} fill={yoadColors[i]} />;
+        })}
+      </BarChart>
+    </ResponsiveContainer>
   );
 }

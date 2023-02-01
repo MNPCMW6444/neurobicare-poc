@@ -22,32 +22,42 @@ function App() {
       container
       wrap="nowrap"
       direction="column"
-      justifyContent="center"
+      justifyContent="space-around"
       alignItems="center"
-      width="100vw"
-      height="100vh"
+      width="110vw"
+      height="110vh"
       bgcolor="#eae4f5"
+      padding="15%"
+      margin={0}
     >
       <Grid item>
         <Button
-          sx={{ color: "#492e7b", fontSize: "200%" }}
+          sx={{
+            color: "#cab7ec",
+            fontSize: "300%",
+            backgroundColor: "#492e7b",
+            borderRadius: "35px",
+          }}
+          variant="contained"
           onClick={async () => seteegO(await connectToMuse())}
         >
           {eegO ? "disconnect" : "connect"}
         </Button>{" "}
       </Grid>
-
-      <Grid item>
-        <Clock />
-      </Grid>
-
-      <Grid item>
-        <POC />
-      </Grid>
-
-      <Grid item>
-        <EEGVisuManager />
-      </Grid>
+      {eegO && (
+        <>
+          {" "}
+          <Grid item>
+            <Clock />
+          </Grid>
+          <Grid item>
+            <POC />
+          </Grid>
+          <Grid item>
+            <EEGVisuManager />
+          </Grid>
+        </>
+      )}
     </Grid>
   );
 }

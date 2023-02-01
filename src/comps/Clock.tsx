@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { FrequencyBands } from "../constants";
 import useClear from "../hooks/clear";
@@ -30,13 +30,13 @@ export default function Clock() {
 
   if (new Date().getSeconds() - new Date(timestamp).getSeconds() > 1) clear();
   return (
-    <>
+    <Box paddingTop="10%" paddingBottom="10%">
       <Typography variant="h4" color="#492e7b">
         Store Time: {new Date(timestamp).toLocaleTimeString()}
       </Typography>
       <Typography variant="h4" color="#492e7b">
         Now Time: {new Date().toLocaleTimeString()}
       </Typography>
-    </>
+    </Box>
   );
 }
