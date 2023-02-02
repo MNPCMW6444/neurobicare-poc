@@ -21,10 +21,10 @@ function App() {
       direction="column"
       justifyContent="space-around"
       alignItems="center"
-      width="110vw"
-      height="110vh"
+      width="100vw"
+      height="100vh"
       bgcolor="#eae4f5"
-      padding="15%"
+      padding="5%"
       margin={0}
     >
       <Grid item>
