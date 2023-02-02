@@ -27,21 +27,24 @@ function App() {
       padding="5%"
       margin={0}
     >
-      <Grid item>
-        <Button
-          sx={{
-            color: "#cab7ec",
-            fontSize: "300%",
-            backgroundColor: "#492e7b",
-            borderRadius: "35px",
-          }}
-          variant="contained"
-          onClick={async () => seteegO(await connectToMuse())}
-        >
-          {eegO ? "disconnect" : "connect"}
-        </Button>
-      </Grid>
-      {eegO && <EEGProvider />}
+      {!eegO ? (
+        <Grid item>
+          <Button
+            sx={{
+              color: "#cab7ec",
+              fontSize: "300%",
+              backgroundColor: "#492e7b",
+              borderRadius: "35px",
+            }}
+            variant="contained"
+            onClick={async () => seteegO(await connectToMuse())}
+          >
+            {eegO ? "disconnect" : "connect"}
+          </Button>
+        </Grid>
+      ) : (
+        eegO && <EEGProvider />
+      )}
     </Grid>
   );
 }

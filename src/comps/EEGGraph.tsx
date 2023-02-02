@@ -36,25 +36,25 @@ export default function EEGGraph({ data }: any) {
   });
 
   return (
-    <ResponsiveContainer width={1000} height={250}>
-      <BarChart
-        data={dataE}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        {ourChannels.map((channelName, i: number) => {
-          return <Bar dataKey={channelName} fill={yoadColors[i]} />;
-        })}
-      </BarChart>
-    </ResponsiveContainer>
+    <BarChart
+      height={250}
+      width={1000}
+      data={dataE}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      {ourChannels.map((channelName, i: number) => {
+        return <Bar key={i} dataKey={channelName} fill={yoadColors[i]} />;
+      })}
+    </BarChart>
   );
 }

@@ -8,44 +8,47 @@ import { FrequencyBands } from "./constants";
 import { FrequencyRangeInHz } from "./types";
 import storeObservabler from "./muse/storeObservabler";
 import { store } from "./store/store";
-import { map } from "rxjs/operators";
+import { combineLatest } from "rxjs/operators";
 
-const fgetter = () => {
-  const freqnames = Object.keys(FrequencyBands);
-  const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
+const freqnames = Object.keys(FrequencyBands);
+const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
 
-  const frequencyBands = {} as any;
+const frequencyBands = {} as any;
 
-  freqnames.forEach((freqname: string, index: number) => {
-    frequencyBands[freqname] = [
-      freqrange[index].minFrequencyiInHz,
-      freqrange[index].maxFrequencyiInHz,
-    ];
-  });
-  return frequencyBands;
-};
+freqnames.forEach((freqname: string, index: number) => {
+  frequencyBands[freqname] = [
+    freqrange[index].minFrequencyiInHz,
+    freqrange[index].maxFrequencyiInHz,
+  ];
+});
 
 export default function EEGProvider() {
-  const frequencyBands = fgetter();
-
   const [final, setFinal] = useState();
 
+  const [all] = useState(storeObservabler(store));
+
   useEffect(() => {
-    const proccesed = storeObservabler(store).pipe(
-      epoch({ duration: 256, interval: 100 }) as any,
-      fft({ bins: 256 }) as any,
-      powerByBand(frequencyBands) as any
-    );
-    const all = storeObservabler(store);
+    const proccesed =
+      frequencyBands &&
+      all.pipe(
+        epoch({ duration: 256, interval: 100 }) as any,
+        fft({ bins: 256 }) as any,
+        powerByBand(frequencyBands) as any
+      );
 
-    const combined = all.pipe(
-      map((all) =>
-        proccesed.pipe(map((proccesed) => ({ original: all, proccesed })))
-      )
-    );
+    const combined =
+      proccesed &&
+      all.pipe(
+        combineLatest(proccesed, (firstValue: any, secondValue: any) => ({
+          original: firstValue,
+          proccesed: secondValue,
+        }))
+      );
 
-    combined.subscribe((x: any) => setFinal(x));
-  }, [frequencyBands]);
+    combined.subscribe((x: any) => {
+      setFinal(x);
+    });
+  }, [all]);
 
   return (
     <>
@@ -56,7 +59,7 @@ export default function EEGProvider() {
         <POC currentEEG={(final as any)?.proccesed} />
       </Grid>
       <Grid item>
-        <EEGVisuManager currentEEG={(final as any)?.original} />
+        <EEGVisuManager currentEEG={(final as any)?.proccesed} />
       </Grid>
     </>
   );
