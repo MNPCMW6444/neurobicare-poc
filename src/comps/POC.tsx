@@ -1,29 +1,8 @@
 import Grid from "@mui/material/Grid";
-import { epoch, fft, powerByBand } from "@neurosity/pipes";
-import { useEffect, useState } from "react";
-import { FrequencyBands } from "../constants";
-import storeObservabler from "../muse/storeObservabler";
-import { store } from "../store/store";
-import { FrequencyRangeInHz } from "../types";
+
 import ScoreGraph from "./ScoreGraph";
 
-export default function POC() {
-  const [currentEEG, setcurrentEEG] = useState<any>();
-
-  const frequencyBands = fgetter();
-
-  useEffect(() => {
-    storeObservabler(store)
-      .pipe(
-        epoch({ duration: 256, interval: 100 }) as any,
-        fft({ bins: 256 }) as any,
-        powerByBand(frequencyBands) as any
-      )
-      .subscribe((eeg: any) => {
-        eeg && setcurrentEEG(eeg);
-      });
-  }, [frequencyBands]);
-
+export default function POC({ currentEEG }: any) {
   return (
     <Grid
       container
@@ -48,8 +27,6 @@ export default function POC() {
     </Grid>
   );
 }
-
-//const ourChannels = ["A1", "A2", "F7", "F8"];
 
 const getAttentionScoreFromObject = (object: any) => {
   let score = 5;
@@ -91,19 +68,4 @@ const getCalmnessScoreFromObject = (object: any) => {
         4;
   } catch (e) {}
   return Math.floor(score < 5 ? 5 : score > 100 ? 100 : score);
-};
-
-const fgetter = () => {
-  const freqnames = Object.keys(FrequencyBands);
-  const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
-
-  const frequencyBands = {} as any;
-
-  freqnames.forEach((freqname: string, index: number) => {
-    frequencyBands[freqname] = [
-      freqrange[index].minFrequencyiInHz,
-      freqrange[index].maxFrequencyiInHz,
-    ];
-  });
-  return frequencyBands;
 };

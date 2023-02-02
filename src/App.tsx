@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { EEGReading } from "muse-js/dist/lib/muse-interfaces";
 import { useState } from "react";
@@ -6,10 +5,8 @@ import { connectToMuse } from "./muse/connection";
 import { Observable } from "rxjs";
 import { addChannelSample } from "./store/reducers/museReducer";
 import { useDispatch } from "react-redux";
-import EEGVisuManager from "./comps/EEGVisuManager";
 import Grid from "@mui/material/Grid";
-import POC from "./comps/POC";
-import Clock from "./comps/Clock";
+import EEGProvider from "./EEGProvider";
 
 function App() {
   const [eegO, seteegO] = useState<Observable<EEGReading>>();
@@ -42,22 +39,9 @@ function App() {
           onClick={async () => seteegO(await connectToMuse())}
         >
           {eegO ? "disconnect" : "connect"}
-        </Button>{" "}
+        </Button>
       </Grid>
-      {eegO && (
-        <>
-          {" "}
-          <Grid item>
-            <Clock />
-          </Grid>
-          <Grid item>
-            <POC />
-          </Grid>
-          <Grid item>
-            <EEGVisuManager />
-          </Grid>
-        </>
-      )}
+      {eegO && <EEGProvider />}
     </Grid>
   );
 }
