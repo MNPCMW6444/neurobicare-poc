@@ -26,7 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "prestart": "npm install && cd server && npm install",
+    "start": "PORT=5665 react-scripts start & cd server && npm run dev",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
