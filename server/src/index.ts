@@ -66,8 +66,8 @@ app.use((req, res, next) => {
 app.get("/areyoualive", (_, res) => res.json({ answer: "yes" }));
 
 app.post("/savedata", async (req, res) => {
-  const { data } = req.body;
-  const dataToSave = new Data({ data });
+  const { data, tag } = req.body;
+  const dataToSave = new Data({ data, tag });
   await dataToSave.save();
   res.status(200);
 });
