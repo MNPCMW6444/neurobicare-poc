@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import domain from "./util/domain";
 
 export default function ToServer({ currentEEG }: any) {
   const toSend: any = {};

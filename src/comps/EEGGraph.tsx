@@ -1,4 +1,3 @@
-import { channelNames } from "muse-js";
 import {
   BarChart,
   Bar,
@@ -7,24 +6,17 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from "recharts";
+import NeurobicareColors from "./util/NeurobicareColors";
 
 const ourChannels = ["A1", "A2", "F7", "F8"];
-const yoadColors = ["#492e7b", "#cab7ec", "#917aba", "#71589e"];
 
 export default function EEGGraph({ data }: any) {
   const bands = Object.keys(data);
 
   const dataE = bands.map((bandName) => {
-    /* let avg = 0;
-    for (let i = 0; i < data[channelName].length; i++)
-      avg = avg + data[channelName][i];
-    avg = avg / data[channelName].length; */
     let ret = {
       name: bandName,
-      /*       value: avg,
-       */
     };
     ourChannels.forEach((channelName: string, i: number) => {
       const newObj: any = {};
@@ -53,7 +45,13 @@ export default function EEGGraph({ data }: any) {
       <Tooltip />
       <Legend />
       {ourChannels.map((channelName, i: number) => {
-        return <Bar key={i} dataKey={channelName} fill={yoadColors[i]} />;
+        return (
+          <Bar
+            key={i}
+            dataKey={channelName}
+            fill={(NeurobicareColors as any)[("p" + i) as keyof any]}
+          />
+        );
       })}
     </BarChart>
   );

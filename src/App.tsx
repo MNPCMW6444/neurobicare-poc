@@ -7,6 +7,7 @@ import { addChannelSample } from "./store/reducers/museReducer";
 import { useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import EEGProvider from "./EEGProvider";
+import NeurobicareColors from "./comps/util/NeurobicareColors";
 
 function App() {
   const [eegO, seteegO] = useState<Observable<EEGReading>>();
@@ -23,7 +24,7 @@ function App() {
       alignItems="center"
       width="100vw"
       height="100vh"
-      bgcolor="#eae4f5"
+      bgcolor={NeurobicareColors.p4}
       padding="5%"
       margin={0}
     >
@@ -31,9 +32,9 @@ function App() {
         <Grid item>
           <Button
             sx={{
-              color: "#cab7ec",
+              color: NeurobicareColors.p3,
               fontSize: "300%",
-              backgroundColor: "#492e7b",
+              backgroundColor: NeurobicareColors.p0,
               borderRadius: "35px",
             }}
             variant="contained"
