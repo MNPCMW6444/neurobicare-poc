@@ -41,11 +41,11 @@ const getAttentionScoreFromObject = (object: any) => {
     });
     score =
       100 -
-      (4 * yoadedObject.BETA_HIGH +
-        3 * yoadedObject.BETA_MID +
-        3 * yoadedObject.BETA_LOW)
-      + (3 * yoadedObject.THETA + 4 * yoadedObject.ALPHA_LOW + yoadedObject.ALPHA_HIGH);
-  } catch (e) { }
+      (yoadedObject.BETA_HIGH +
+        2 * yoadedObject.BETA_MID +
+        3 * yoadedObject.BETA_LOW) *
+        4;
+  } catch (e) {}
   return Math.floor(score < 5 ? 5 : score > 100 ? 100 : score);
 };
 
@@ -62,9 +62,10 @@ const getCalmnessScoreFromObject = (object: any) => {
     });
     score =
       100 -
-      (4 * yoadedObject.THETA +
-        3 * yoadedObject.ALPHA_LOW +
-        2 * yoadedObject.ALPHA_HIGH) + (3 * yoadedObject.BETA_HIGH + 2 * yoadedObject.BETA_MID + yoadedObject.BETA_LOW);
-  } catch (e) { }
+      (3 * yoadedObject.THETA +
+        2 * yoadedObject.ALPHA_LOW +
+        yoadedObject.ALPHA_HIGH) *
+        4;
+  } catch (e) {}
   return Math.floor(score < 5 ? 5 : score > 100 ? 100 : score);
 };
