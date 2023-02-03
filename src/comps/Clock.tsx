@@ -7,10 +7,10 @@ export default function Clock({ timestamp }: { timestamp: number }) {
 
   return (
     <Box paddingTop="10%" paddingBottom="10%">
-      <Typography variant="h4" color="#492e7b">
+      <Typography variant="h6" color="#492e7b">
         Store Time: {new Date(timestamp).toLocaleTimeString()}
       </Typography>
-      <Typography variant="h4" color="#492e7b">
+      <Typography variant="h6" color="#492e7b">
         Now Time: {new Date().toLocaleTimeString()}
       </Typography>
     </Box>

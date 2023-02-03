@@ -9,6 +9,7 @@ import { FrequencyRangeInHz } from "./types";
 import storeObservabler from "./muse/storeObservabler";
 import { store } from "./store/store";
 import { combineLatest } from "rxjs/operators";
+import ToServer from "./comps/ToServer";
 
 const freqnames = Object.keys(FrequencyBands);
 const freqrange: FrequencyRangeInHz[] = Object.values(FrequencyBands);
@@ -54,6 +55,9 @@ export default function EEGProvider() {
     <>
       <Grid item>
         <Clock timestamp={((final as any)?.original as any)?.timestamp || 0} />
+      </Grid>{" "}
+      <Grid item>
+        <ToServer currentEEG={(final as any)?.original as any} />
       </Grid>
       <Grid item>
         <POC currentEEG={(final as any)?.proccesed} />
