@@ -27,7 +27,7 @@
   },
   "scripts": {
     "prestart": "npm install && cd server && npm install",
-    "start": "PORT=5665 react-scripts start & cd server && npm run dev",
+    "start": "GENERATE_SOURCEMAP=false PORT=5665 react-scripts start & cd server && npm run dev",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
