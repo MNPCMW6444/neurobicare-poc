@@ -1,4 +1,5 @@
 import { Legend, RadialBar, RadialBarChart, Tooltip } from "recharts";
+import NeurobicareColors from "./util/NeurobicareColors";
 
 export default function ScoreGraph({
   score,
@@ -11,17 +12,15 @@ export default function ScoreGraph({
     {
       name: "100",
       score: 100,
-      fill: "#eae4f5",
+      fill: NeurobicareColors.p4,
     },
     {
       name,
       score: score,
-      fill: "#492e7b",
+      fill: NeurobicareColors.p0,
     },
   ];
 
-
-  
   return (
     <RadialBarChart
       width={730}
@@ -33,7 +32,7 @@ export default function ScoreGraph({
       endAngle={0}
     >
       <RadialBar
-        label={{ fill: "#eae4f5", position: "insideStart" }}
+        label={{ fill: NeurobicareColors.p4, position: "insideStart" }}
         background
         dataKey="score"
       />
