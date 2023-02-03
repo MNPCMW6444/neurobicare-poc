@@ -1,4 +1,4 @@
-import { FrequencyBandsDefinitionConstant, FrequencyRangeInHz } from "../types";
+import { FrequencyBandsDefinitionConstant } from "../types";
 import { FrequencyBandsPoints } from "./enums";
 
 const FrequencyBands: FrequencyBandsDefinitionConstant = {
