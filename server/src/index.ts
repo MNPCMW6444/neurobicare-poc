@@ -4,6 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 
+import Data from "./models/dataModel";
+
 const app = express();
 const port = process.env.PORT || 6555;
 
@@ -14,6 +16,7 @@ let mainDbStatus = false;
 let logReq: any;
 
 const connectToDB = () => {
+  mongoose.set("strictQuery", false);
   mongoose.connect(
     "" + process.env.MONGO,
     {
@@ -61,3 +64,10 @@ app.use((req, res, next) => {
 });
 
 app.get("/areyoualive", (_, res) => res.json({ answer: "yes" }));
+
+app.post("/savedata", async (req, res) => {
+  const { data } = req.body;
+  const dataToSave = new Data({ data });
+  await dataToSave.save();
+  res.status(200);
+});
