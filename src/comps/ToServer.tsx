@@ -3,7 +3,6 @@ import domain from "./util/domain";
 
 export default function ToServer({ currentEEG }: any) {
   const toSend: any = {};
-  debugger;
   if (currentEEG?.info?.channelNames[0])
     toSend[currentEEG?.info?.channelNames[0]] = currentEEG?.data[0];
   if (currentEEG?.info?.channelNames[0])
@@ -14,7 +13,7 @@ export default function ToServer({ currentEEG }: any) {
     toSend[currentEEG?.info?.channelNames[3]] = currentEEG?.data[3];
 
   toSend.A2 &&
-    axios.post(domain + "data", {
+    axios.post(domain + "savedata", {
       data: JSON.stringify(toSend),
       tag: JSON.stringify(null),
     });

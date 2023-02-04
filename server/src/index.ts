@@ -48,7 +48,7 @@ app.use(
 
 app.listen(port, () => console.log(`Server started on port: ${port}`));
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   if (mainDbStatus) {
     logReq
       ? logReq(req)
@@ -61,7 +61,7 @@ app.use((req, res, next) => {
     res
       .status(500)
       .json({ serverError: "Server is down now. Please try again later." });
-});
+}); */
 
 app.get("/areyoualive", (_, res) => res.json({ answer: "yes" }));
 
